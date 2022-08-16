@@ -1,3 +1,4 @@
+#Importamos las biblotecas necesarias
 from distutils.log import error
 from errno import errorcode
 import tkinter as ttk
@@ -5,44 +6,40 @@ from Funciones import *
 
 def Obt():
     cont = 0
-    #getting data from text box
-    dato = T.get();
+    #Obtenemos los datos de la caja de texto
+    dato = T.get()
+
+    #Verificamos si el dato obtenido contiene un punto
     for i in range(len(dato)):
         if dato[i] == '.':
             cont = 1
 
+    #Si contiene un punto separamos la cadena
     if cont == 1:
         numero = dato.split('.')
         decimal = numero[1]
         entero = numero[0]
     else:
-        numero = dato.split('.')
-        entero = numero[0]
+        entero = dato
         decimal = 0
 
     print(entero)
     print(decimal)
 
-    #verification of data obtained
+    #Verificamos que los datos no contengan literales
     try:
         int(entero)
         int(decimal)
+    
         Operaciones(entero, decimal)
 
-    except:
-        #If the data obtained isnt a number show a message
-        otro = ttk.Tk()#instantiating tkinter
-        otro.title("Error")#window title
-        otro.geometry("300x95")#Size of window
-
-        def Cerrar(): 
-            otro.destroy()#Close the window using a button
-
-        lblErr = ttk.Label(otro, text="Debe de introducir datos numericos")
-        btnErr = ttk.Button(otro, text="Aceptar", command=Cerrar)
-
-        lblErr.pack()
-        btnErr.pack()
+    except ValueError:
+        #Si el dato obtenido contiene una letra mostraremos un mensaje
+        messagebox.showerror("Data Error","Los datos deben ser numericos")
+    
+    except BaseException as err:
+        #Si ocurre otra clase se error lo mostramos como log
+        print(f"Unexpected {err=}, {type(err)=}")
 
 raiz = ttk.Tk() #instantiating tkinter
 raiz.title("Calculadora") #window title
@@ -58,4 +55,4 @@ T.pack()
 btn.pack()
 
 
-raiz.mainloop() #We made a loop because only show the window one second (or less)
+raiz.mainloop() #Creamos un ciclo para que no se cierre la ventana
