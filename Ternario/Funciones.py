@@ -34,8 +34,9 @@ def Operaciones(entero,decimal):
     Resultado(entero)
     Decimal(decimal)
 
-    res = Resultado(entero), Decimal(decimal)
+    res = Resultado(entero), round(Decimal(decimal),len(decimal))
     print(res)
+    messagebox.showinfo(message=''.join(str(res)),title="Resultado")
 
 
 def Suma(dato,decimal):
@@ -61,7 +62,7 @@ def Resultado(dato):
         resEntero = resEntero + int(dato[i]) * 3** (len(dato)-i-1)
     
     print(resEntero)
-    messagebox.showinfo(message='Resultado: '.join(str(resEntero)),title="Resultado")
+    #messagebox.showinfo(message='Resultado: '.join(str(resEntero)),title="Resultado")
     return(resEntero)
 
 def Decimal(dato):
