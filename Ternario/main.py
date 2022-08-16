@@ -1,3 +1,5 @@
+from distutils.log import error
+from errno import errorcode
 import tkinter as ttk
 from Funciones import *
 
@@ -7,15 +9,27 @@ def Obt():
     dato = T.get();
     for i in range(len(dato)):
         if dato[i] == '.':
-            print('tiene punto decimal')
             cont = 1
+
+    if cont == 1:
+        numero = dato.split('.')
+        decimal = numero[1]
+        entero = numero[0]
+    else:
+        numero = dato.split('.')
+        entero = numero[0]
+        decimal = 0
+
+    print(entero)
+    print(decimal)
 
     #verification of data obtained
     try:
-        int(dato)
-        Operaciones(dato)  
+        int(entero)
+        int(decimal)
+        Operaciones(entero, decimal)
+
     except:
-        
         #If the data obtained isnt a number show a message
         otro = ttk.Tk()#instantiating tkinter
         otro.title("Error")#window title

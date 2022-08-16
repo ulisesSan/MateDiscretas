@@ -1,12 +1,13 @@
 import tkinter as ttk
 from tkinter import messagebox
 
-def Operaciones(dato):
+def Operaciones(entero,decimal):
     arreglo = []
-    print (dato)
-    for i in range(len (dato)):
-        if int(dato[i]) <=0 | int(dato[i]) <= 2 :
-            arreglo.append(dato[i] + 'x3^' + str(len(dato)-i-1))
+    rango = 0
+    print (entero)
+    for i in range(len (entero)):
+        if int(entero[i]) >=0 | int(entero[i]) <= 2:
+            arreglo.append(entero[i] + 'x3^' + str(len(entero)-i-1))
             print(arreglo[i])
 
         else:
@@ -29,25 +30,45 @@ def Operaciones(dato):
 
     print("despues de una pausa volvemos XD")
 
-    Suma(dato)
-    Resultado(dato)
+    Suma(entero,decimal)
+    Resultado(entero)
+    Decimal(decimal)
 
-def Suma(dato):
-    arreglo = []
+    res = Resultado(entero), Decimal(decimal)
+    print(res)
+
+
+def Suma(dato,decimal):
+    arregloEntero = []
+    arregloDecimal = []
     print(dato)
     for i in range(len (dato)):
         if int(dato[i]) <=0 | int(dato[i]) <= 2 :
-            arreglo.append(int(dato[i]) * 3** (len(dato)-i-1))
-            print(arreglo[i])
+            arregloEntero.append(int(dato[i]) * 3** (len(dato)-i-1))
+            print(arregloEntero[i])
+    for j in range(len(decimal)):
+        if int(decimal[i]) <=0 | int(decimal[i]) <= 2 :
+            arregloDecimal.append(int(decimal[i]) * 3** (len(decimal)-(i)- len(decimal)-1))
+            print(len(decimal)-(i)- len(decimal)-1)
 
-    messagebox.showinfo(message=''.join(str(arreglo)),title=("Numeros a sumar"))
+    Resultado = arregloEntero, '.', arregloDecimal
+    messagebox.showinfo(message=''.join(str(Resultado)),title=("Numeros a sumar"))
 
 
 def Resultado(dato):
+    resEntero = 0
+    for i in range(len (dato)):
+        resEntero = resEntero + int(dato[i]) * 3** (len(dato)-i-1)
+    
+    print(resEntero)
+    messagebox.showinfo(message='Resultado: '.join(str(resEntero)),title="Resultado")
+    return(resEntero)
+
+def Decimal(dato):
     res = 0
     for i in range(len (dato)):
-
-        res = res + int(dato[i]) * 3** (len(dato)-i-1)
+        res = res + int(dato[i]) * 3** (len(dato)-(i)- len(dato)-1)
     
     print(res)
-    messagebox.showinfo(message=''.join(str(res)),title="Resultado")
+    return(res)
+    #messagebox.showinfo(message='Resultado: '.join(str(res)),title="Resultado")
