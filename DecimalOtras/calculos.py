@@ -1,5 +1,8 @@
 from tkinter import messagebox
 
+digit2Value = { "0":0, "1":1, "2": 2, "3":3, "4":4,
+                "5":5, "6":6, "7":7, "8":8, "9":9, 
+                "A":10, "B":11, "C":12, "D":13, "E":14, "F":15}
 
 def base(base):
     match base:
@@ -36,7 +39,7 @@ def verNum(numero):
         valueBool = True
 
     except ValueError:
-        messagebox.showerror(message='Debe de introducir numeros ')
+        messagebox.showerror(message='Debe de introducir numeros validos')
     
     except BaseException as err:
         #Si ocurre otra clase se error lo mostramos como log
@@ -51,23 +54,20 @@ def rango(numero,baseNum):
     if len(numero) != 1:
         numero2 = numero[1]
 
-    for i in range(len (numero1)):
+    for i in range(len(numero1)):
         if int(numero1[i]) >= 0 | int(numero1[i]) <= int(baseNum) - 1:
-            print('entero')
             rango = True
         else:
-            rango = False
-            break
+            return False
+            
         
     
     if len(numero) != 1 :
-        for i in range(len (numero2)):
-            if int(numero2[i]) >= 0 | int(numero2[i]) <= int(baseNum) - 1 :
-                print('decimal')
+        for j in range(len(numero2)):
+            if int(numero2[j]) >= 0 | int(numero2[j]) <= int(baseNum) - 1 :
                 rango = True
             else:
-                rango = False
-                break
+                return False
 
     print('Rango',rango)
     return rango
@@ -88,7 +88,7 @@ def arregloOperaciones(numero,base):
         print(arregloEntero[i])
 
     for i in range(len (decimal)):
-        arregloDecimal.append('+'+decimal[i] + 'x' + str(base) + '^' + str(len(decimal)-(i)-len(decimal)-1))
+        arregloDecimal.append('+'+ decimal[i] + 'x' + str(base) + '^' + str(len(decimal)-(i)-len(decimal)-1))
 
     res = arregloEntero + arregloDecimal
     messagebox.showinfo(message= res)
@@ -115,8 +115,6 @@ def operaciones(numero,Base):
             sum = sum +  arregloDecimal[j]
             print(len(numero2)-(j)- len(numero2)-1)
 
-    
-
     messagebox.showinfo(message = 'Resultado: ' + str(sum))
 
 
@@ -128,20 +126,10 @@ def numeros(numero,baseNum):
     rangoNum = rango(numero.split('.'), comBase)
 
     if valueBool == True & rangoNum == True:
+
         arregloOperaciones(numero.split('.'),comBase)
         calculos(numero.split('.'),baseNum)
         operaciones(numero.split('.'),comBase)
 
-#arregloEntero = []
-    #arregloDecimal = []
-    #Con la longitud del dato entero iteramos 
-    #for i in range(len (dato)):
-    #    if int(dato[i]) <=0 | int(dato[i]) <= 2 :
-    #        arregloEntero.append(int(dato[i]) * 3** (len(dato)-i-1))
-    #        print(arregloEntero[i])
-    #Con la longitud del dato decimal iteramos 
-    #for j in range(len(decimal)):
-    #    if int(decimal[i]) <=0 | int(decimal[i]) <= 2 :
-    #        arregloDecimal.append(int(decimal[i]) * 3** (len(decimal)-(i)- len(decimal)-1))
-    #        print(len(decimal)-(i)- len(decimal)-1)
-
+    else:
+        messagebox.showinfo(message = 'Numero fuera de rango, verifique la base')
