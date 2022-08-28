@@ -44,6 +44,10 @@ def verNum(numero):
     
     return valueBool
 
+def calculos(numero,baseNum):
+    print('base en calculos:', baseNum, '\nlos numeros son: ', numero )
+
+
 
 def numeros(numero,baseNum):
     comBase = base(baseNum)
@@ -51,4 +55,4 @@ def numeros(numero,baseNum):
     valueBool = verNum(numero.split('.'))
     print(valueBool)
     if valueBool == True:
-        print('Ahuevo')
+        calculos(numero.split('.'),baseNum)
