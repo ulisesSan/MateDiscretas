@@ -4,6 +4,7 @@ digit2Value = { "0":0, "1":1, "2": 2, "3":3, "4":4,
                 "5":5, "6":6, "7":7, "8":8, "9":9, 
                 "A":10, "B":11, "C":12, "D":13, "E":14, "F":15}
 
+#Se seleccionan las bases
 def base(base):
     match base:
         case 'Binario':
@@ -21,13 +22,13 @@ def base(base):
         case _:
             messagebox.showinfo('Algo salio mal. Contacte al desarrollador plis')
 
+#Verificamos que lo que se halla ingresado sea un numero valido
 def verNum(numero):
-    
     numero1 = 0
     numero2 = 0
     valueBool = False
     if len(numero) == 1:
-        numero1 = numero[0]
+        numero1 = digit2Value[numero[0]]
     
     else:
         numero1 = numero[0]
@@ -47,6 +48,7 @@ def verNum(numero):
     
     return valueBool
 
+#Verificamos que el numero ingresado se encuentre dentro del rango de la base
 def rango(numero,baseNum):
     rango = False
     numero1 = numero[0]
@@ -55,7 +57,7 @@ def rango(numero,baseNum):
         numero2 = numero[1]
 
     for i in range(len(numero1)):
-        if int(numero1[i]) >= 0 | int(numero1[i]) <= int(baseNum) - 1:
+        if int(digit2Value[numero1[i]]) >= 0 | int(digit2Value[numero1[i]]) <= int(baseNum) - 1:
             rango = True
         else:
             return False
@@ -64,7 +66,7 @@ def rango(numero,baseNum):
     
     if len(numero) != 1 :
         for j in range(len(numero2)):
-            if int(numero2[j]) >= 0 | int(numero2[j]) <= int(baseNum) - 1 :
+            if int(digit2Value[numero2[j]]) >= 0 | int(digit2Value[numero2[j]]) <= int(baseNum) - 1 :
                 rango = True
             else:
                 return False
@@ -72,9 +74,11 @@ def rango(numero,baseNum):
     print('Rango',rango)
     return rango
 
+#Esto no hace nada mas que imprimir los numeros ingresados XD
 def calculos(numero,baseNum):
     print('base en calculos:', baseNum, '\nlos numeros son: ', numero )
 
+#Genera el arreglo y muestra como va a ser la operacion 
 def arregloOperaciones(numero,base):
     arregloEntero = []
     arregloDecimal = []
@@ -83,18 +87,19 @@ def arregloOperaciones(numero,base):
     if len(numero) != 1:
         decimal = numero[1]
     for i in range(len (entero)):
-        #Verificamos que el numero ingresado corresponda al que queremos convertir
-        arregloEntero.append(entero[i] + 'x' + str(base) + '^' + str(len(entero)-i-1)+'+')
+        arregloEntero.append(str(digit2Value[entero[i]]) + 'x' + str(base) + '^' + str(len(entero)-i-1)+'+')
         print(arregloEntero[i])
 
     for i in range(len (decimal)):
-        arregloDecimal.append('+'+ decimal[i] + 'x' + str(base) + '^' + str(len(decimal)-(i)-len(decimal)-1))
+        arregloDecimal.append('+'+ str(digit2Value[decimal[i]]) + 'x' + str(base) + '^' + str(len(decimal)-(i)-len(decimal)-1))
 
     res = arregloEntero + arregloDecimal
     messagebox.showinfo(message= res)
     print(res)
 
+#Hace las operaciones y la suma
 def operaciones(numero,Base):
+    #Se generan las operaciones pertinentes...
     sum = 0
     numero1 = numero[0]
     numero2 = '0'
@@ -102,16 +107,16 @@ def operaciones(numero,Base):
         numero2 = numero[1]
     arregloEntero = []
     arregloDecimal = []
-    
+    #Con la longitud del dato entero se itera 
     for i in range(len (numero1)):
-        if int(numero1[i]) >=0 | int(numero1[i]) <= Base :
-            arregloEntero.append(int(numero1[i]) * int(Base)** (len(numero1)-i-1))
+        if int(digit2Value[numero1[i]]) >=0 | int(digit2Value[numero1[i]]) <= Base :
+            arregloEntero.append(int(digit2Value[numero1[i]]) * int(Base)** (len(numero1)-i-1))
             print(arregloEntero[i])
             sum = sum +  arregloEntero[i]
     #Con la longitud del dato decimal iteramos 
     for j in range(len (str(numero2))):
-        if int(numero2[j]) >=0 | int(numero2[j]) <= int(Base) :
-            arregloDecimal.append(int(numero2[j]) * int(Base)** (len(numero2)-(j)- len(numero2)-1))
+        if int(digit2Value[numero2[j]]) >=0 | int(digit2Value[numero2[j]]) <= int(Base) :
+            arregloDecimal.append(int(digit2Value[numero2[j]]) * int(Base)** (len(numero2)-(j)- len(numero2)-1))
             sum = sum +  arregloDecimal[j]
             print(len(numero2)-(j)- len(numero2)-1)
 

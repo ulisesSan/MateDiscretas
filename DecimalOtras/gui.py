@@ -3,6 +3,7 @@ from tkinter import ttk
 from calculos import *
 
 def data():
+    #Para enviar datos para hacer calculos
     base = combo.get()
     numero = text.get()
 
@@ -10,6 +11,7 @@ def data():
     print(numero)
     numeros(numero,base)
 
+#Creamos ventana
 mainWindow = tk.Tk()
 mainWindow.title("Calculadora de N a decimal")
 mainWindow.geometry('300x200')
