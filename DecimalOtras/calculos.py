@@ -24,19 +24,23 @@ def base(base):
 
 #Verificamos que lo que se halla ingresado sea un numero valido
 def verNum(numero):
-    numero1 = 0
-    numero2 = 0
+    sepNumeroEntero = numero[0]
+    sepNumeroDecimal = '0'
+    numeroEntero = 0
+    numeroDecimal = 0
     valueBool = False
     if len(numero) == 1:
-        numero1 = digit2Value[numero[0]]
+        for i in range(len(numero[0])):
+            numeroEntero = digit2Value[sepNumeroEntero[i]]
     
     else:
-        numero1 = numero[0]
-        numero2 = numero[1]
-
+        for i in range(len(numero[0])):
+            for j in range(len(numero[1])-1):
+                numeroDecimal = digit2Value[sepNumeroDecimal[j]]
+            numeroEntero = digit2Value[sepNumeroEntero[i]]
     try:
-        int(numero1)
-        int(numero2)
+        int(numeroEntero)
+        int(numeroDecimal)
         valueBool = True
 
     except ValueError:
@@ -71,13 +75,10 @@ def rango(numero,baseNum):
             else:
                 return False
 
-    print('Rango',rango)
     return rango
 
 #Esto no hace nada mas que imprimir los numeros ingresados XD
-def calculos(numero,baseNum):
-    print('base en calculos:', baseNum, '\nlos numeros son: ', numero )
-
+   
 #Genera el arreglo y muestra como va a ser la operacion 
 def arregloOperaciones(numero,base):
     arregloEntero = []
@@ -88,14 +89,12 @@ def arregloOperaciones(numero,base):
         decimal = numero[1]
     for i in range(len (entero)):
         arregloEntero.append(str(digit2Value[entero[i]]) + 'x' + str(base) + '^' + str(len(entero)-i-1)+'+')
-        print(arregloEntero[i])
-
+       
     for i in range(len (decimal)):
         arregloDecimal.append('+'+ str(digit2Value[decimal[i]]) + 'x' + str(base) + '^' + str(len(decimal)-(i)-len(decimal)-1))
 
     res = arregloEntero + arregloDecimal
     messagebox.showinfo(message= res)
-    print(res)
 
 #Hace las operaciones y la suma
 def operaciones(numero,Base):
@@ -111,29 +110,24 @@ def operaciones(numero,Base):
     for i in range(len (numero1)):
         if int(digit2Value[numero1[i]]) >=0 | int(digit2Value[numero1[i]]) <= Base :
             arregloEntero.append(int(digit2Value[numero1[i]]) * int(Base)** (len(numero1)-i-1))
-            print(arregloEntero[i])
             sum = sum +  arregloEntero[i]
     #Con la longitud del dato decimal iteramos 
     for j in range(len (str(numero2))):
         if int(digit2Value[numero2[j]]) >=0 | int(digit2Value[numero2[j]]) <= int(Base) :
             arregloDecimal.append(int(digit2Value[numero2[j]]) * int(Base)** (len(numero2)-(j)- len(numero2)-1))
             sum = sum +  arregloDecimal[j]
-            print(len(numero2)-(j)- len(numero2)-1)
 
     messagebox.showinfo(message = 'Resultado: ' + str(sum))
 
 
 def numeros(numero,baseNum):
     comBase = int(base(baseNum))
-    print("entra al calculo", numero ," ", baseNum, ' ',comBase)
     valueBool = verNum(numero.split('.'))
-    print(valueBool)
     rangoNum = rango(numero.split('.'), comBase)
 
     if valueBool == True & rangoNum == True:
 
         arregloOperaciones(numero.split('.'),comBase)
-        calculos(numero.split('.'),baseNum)
         operaciones(numero.split('.'),comBase)
 
     else:

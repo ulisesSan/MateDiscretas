@@ -14,7 +14,7 @@ def data():
 #Creamos ventana
 mainWindow = tk.Tk()
 mainWindow.title("Calculadora de N a decimal")
-mainWindow.geometry('300x200')
+mainWindow.geometry('320x200')
 
 n = ['Binario','Cuaternario','Octal','Hexadecimal']
 combo = ttk.Combobox(mainWindow,values = n,width = 25, state = 'readonly')
@@ -23,6 +23,7 @@ label1 = tk.Label(mainWindow, text = 'Introduzca el numero decimal que desea con
 text = tk.Entry(mainWindow,width = 25,x = 50)
 button = tk.Button(mainWindow, text = 'convertir', command=data)
 
+mainWindow.resizable(height=False, width=False)
 combo.set('Binario')
 label.pack()
 combo.pack()

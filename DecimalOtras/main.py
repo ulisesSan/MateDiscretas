@@ -1,4 +1,4 @@
-from os import getuid
+#from os import getuid
 from gui import *
 
 def main():
